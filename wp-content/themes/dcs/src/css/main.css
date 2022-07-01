@@ -1,0 +1,6 @@
+@import "tailwindcss/base.css";
+@import "tailwindcss/components.css";
+@import "tailwindcss/utilities.css";
+@import "tailwindcss/screens.css";
+@import "tailwindcss/variants.css";
+@import "./base/wpcore.css";

@@ -1,0 +1,23 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+        "at-rule-no-unknown": null,
+        "declaration-property-value-disallowed-list": {
+            "border": "none",
+            "outline": "none"
+        },
+        "function-disallowed-list": [
+            "calc",
+            "lighten",
+            "darken"
+        ],
+        "property-disallowed-list": [
+            "border-radius",
+            "border-top-left-radius",
+            "border-top-right-radius",
+            "border-bottom-right-radius",
+            "border-bottom-left-radius",
+            "transition"
+        ]
+    }
+}
