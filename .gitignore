@@ -1,0 +1,10 @@
+/node_modules
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+wp-config.local.php

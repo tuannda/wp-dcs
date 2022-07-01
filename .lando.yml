@@ -1,0 +1,8 @@
+name: wp-dcs
+recipe: wordpress
+config:
+  webroot: .
+  php: '5.6'
+  via: apache
+  database: mysql:5.7
+  xdebug: false
