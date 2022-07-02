@@ -14,7 +14,7 @@
         "friendsofphp/php-cs-fixer": "3.*"
     },
     "scripts": {
-        "cs:check": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "cs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "cs:fix": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcbf",
         "cs:fixer": "@php ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix"
     }
