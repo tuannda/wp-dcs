@@ -1,3 +1,5 @@
 .hero {
-
+    .logo {
+        background: url("~assets/img/one.png");
+    }
 }

@@ -27,7 +27,6 @@
     <header id="masthead" class="site-header">
         <div class="site-branding">
             <?php
-            the_custom_logo();
             if (is_front_page() && is_home()) :
                 ?>
                 <h1 class="site-title"><a href="<?= esc_url(home_url('/')); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
@@ -49,8 +48,8 @@
             <?php
             wp_nav_menu(
                 [
-                        'theme_location' => 'menu-1',
-                        'menu_id' => 'primary-menu',
+                        'theme_location' => 'main_menu',
+                        'menu_id' => 'main-menu',
                     ]
             );
             ?>

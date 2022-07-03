@@ -10,6 +10,7 @@ module.exports = {
                 }
             })
         },
+        'tailwindcss/nesting': {},
         tailwindcss: {},
         'postcss-simple-vars': {},
         'postcss-preset-env': {

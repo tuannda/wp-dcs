@@ -4,3 +4,4 @@
 @import "tailwindcss/screens.css";
 @import "tailwindcss/variants.css";
 @import "./base/wpcore.css";
+@import "~modules/hero/hero.css";

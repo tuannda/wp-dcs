@@ -13,7 +13,9 @@ module.exports = {
         poll: 1000,
         followSymlinks: true,
         stdin: true,
-        ignored: [path.resolve(__dirname, 'node_modules')]
+        ignored: [
+            path.resolve(__dirname, 'node_modules')
+        ]
     },
     optimization: {
         removeAvailableModules: false,
@@ -24,12 +26,12 @@ module.exports = {
         path: path.join(__dirname, 'assets'),
         filename: '[name].min.js',
         asyncChunks: true,
-        clean: true
+        clean: false
     },
     resolve: {
         alias: {
             libs: path.resolve(__dirname, 'src/js/libs'),
-            modules: path.resolve(__dirname, 'modules')
+            modules: path.resolve(__dirname, 'modules'),
         },
         extensions: ['.js', '.jsx', '.scss', '.css']
     },
@@ -44,12 +46,14 @@ module.exports = {
             },
             {
                 test: /\.(sc|sa|c)ss$/,
+                exclude: /(node_modules|bower_components)/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
-                            sourceMap: true
+                            sourceMap: true,
+                            url: false
                         }
                     },
                     {
@@ -59,7 +63,17 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|otf|ico)$/i,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: 'assets/[name].[ext]',
+                    outputPath: path.resolve(__dirname, 'assets'),
+                },
+                exclude: /(node_modules|bower_components)/,
+            },
         ]
     },
     plugins: [

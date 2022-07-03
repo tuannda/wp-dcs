@@ -23,6 +23,7 @@
                 <?php
                 dcs_posted_on();
                 dcs_posted_by();
+                dcs_posted_reading_time();
                 ?>
             </div><!-- .entry-meta -->
         <?php endif; ?>

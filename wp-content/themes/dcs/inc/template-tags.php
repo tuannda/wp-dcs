@@ -6,7 +6,7 @@
  * Eventually, some of the functionality here could be replaced by core features.
  */
 
-if (! function_exists('dcs_posted_on')) :
+if (!function_exists('dcs_posted_on')) :
     /**
      * Prints HTML with meta information for the current post-date/time.
      */
@@ -26,7 +26,7 @@ if (! function_exists('dcs_posted_on')) :
         );
 
         $posted_on = sprintf(
-            /* translators: %s: post date. */
+        /* translators: %s: post date. */
             esc_html_x('Posted on %s', 'post date', 'dcs'),
             '<a href="' . esc_url(get_permalink()) . '" rel="bookmark">' . $time_string . '</a>'
         );
@@ -35,14 +35,14 @@ if (! function_exists('dcs_posted_on')) :
     }
 endif;
 
-if (! function_exists('dcs_posted_by')) :
+if (!function_exists('dcs_posted_by')) :
     /**
      * Prints HTML with meta information for the current author.
      */
     function dcs_posted_by()
     {
         $byline = sprintf(
-            /* translators: %s: post author. */
+        /* translators: %s: post author. */
             esc_html_x('by %s', 'post author', 'dcs'),
             '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
         );
@@ -51,7 +51,7 @@ if (! function_exists('dcs_posted_by')) :
     }
 endif;
 
-if (! function_exists('dcs_entry_footer')) :
+if (!function_exists('dcs_entry_footer')) :
     /**
      * Prints HTML with meta information for the categories, tags and comments.
      */
@@ -74,12 +74,12 @@ if (! function_exists('dcs_entry_footer')) :
             }
         }
 
-        if (! is_single() && ! post_password_required() && (comments_open() || get_comments_number())) {
+        if (!is_single() && !post_password_required() && (comments_open() || get_comments_number())) {
             echo '<span class="comments-link">';
             comments_popup_link(
                 sprintf(
                     wp_kses(
-                        /* translators: %s: post title */
+                    /* translators: %s: post title */
                         __('Leave a Comment<span class="screen-reader-text"> on %s</span>', 'dcs'),
                         [
                             'span' => [
@@ -96,7 +96,7 @@ if (! function_exists('dcs_entry_footer')) :
         edit_post_link(
             sprintf(
                 wp_kses(
-                    /* translators: %s: Name of current post. Only visible to screen readers */
+                /* translators: %s: Name of current post. Only visible to screen readers */
                     __('Edit <span class="screen-reader-text">%s</span>', 'dcs'),
                     [
                         'span' => [
@@ -112,7 +112,7 @@ if (! function_exists('dcs_entry_footer')) :
     }
 endif;
 
-if (! function_exists('dcs_post_thumbnail')) :
+if (!function_exists('dcs_post_thumbnail')) :
     /**
      * Displays an optional post thumbnail.
      *
@@ -121,7 +121,7 @@ if (! function_exists('dcs_post_thumbnail')) :
      */
     function dcs_post_thumbnail()
     {
-        if (post_password_required() || is_attachment() || ! has_post_thumbnail()) {
+        if (post_password_required() || is_attachment() || !has_post_thumbnail()) {
             return;
         }
 
@@ -135,24 +135,24 @@ if (! function_exists('dcs_post_thumbnail')) :
         <?php else : ?>
             <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                 <?php
-                    the_post_thumbnail(
-                        'post-thumbnail',
-                        [
+                the_post_thumbnail(
+                    'post-thumbnail',
+                    [
                         'alt' => the_title_attribute(
                             [
-                            'echo' => false,
+                                'echo' => false,
                             ]
                         ),
-                        ]
-                    ); ?>
+                    ]
+                ); ?>
             </a>
 
-            <?php
+        <?php
         endif; // End is_singular().
     }
 endif;
 
-if (! function_exists('wp_body_open')) :
+if (!function_exists('wp_body_open')) :
     /**
      * Shim for sites older than 5.2.
      *
@@ -163,3 +163,38 @@ if (! function_exists('wp_body_open')) :
         do_action('wp_body_open');
     }
 endif;
+
+/**
+ * Return post reading time
+ *
+ * @since 3.1.0
+ */
+if (!function_exists('dcs_posted_reading_time')) {
+
+    function dcs_posted_reading_time($echo = true)
+    {
+
+        global $post;
+
+        $content = get_post_field('post_content', $post->ID);
+        $word_count = str_word_count(strip_tags($content));
+        $word_count = apply_filters('dcs_post_reading_word_count', $word_count);
+        $reading_time = ceil($word_count / 200);
+
+        $reading_time = apply_filters('dcs_post_reading_time', $reading_time);
+
+        $dcs_reading_time = sprintf(
+        /* translators: %s: post reading time. */
+            esc_html_x('%s min read', 'post read time', 'dcs'),
+            esc_html($reading_time)
+        );
+
+        $dcs_reading_time = apply_filters('dcs_meta_reading_time', $dcs_reading_time);
+
+        if ($echo) {
+            echo '<span class="reading-time">' . $dcs_reading_time . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        } else {
+            return $dcs_reading_time;
+        }
+    }
+}

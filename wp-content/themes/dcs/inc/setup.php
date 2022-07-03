@@ -14,7 +14,7 @@ function dcs_setup()
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     register_nav_menus([
-        'primary' => esc_html__('Primary', 'dcs'),
+        'main_menu' => esc_html__('Main Menu', 'dcs'),
     ]);
 
     /*
@@ -34,6 +34,7 @@ function dcs_setup()
         ]
     );
 }
+
 add_action('after_setup_theme', 'dcs_setup');
 
 /**
@@ -47,4 +48,33 @@ function dcs_content_width()
 {
     $GLOBALS['content_width'] = apply_filters('dcs_content_width', 640);
 }
+
 add_action('after_setup_theme', 'dcs_content_width', 0);
+
+/**
+ * The path where JSON files are created when ACF field groups are saved/updated
+ * @param string path of save point
+ * @return string path of save point
+ * @link http://www.advancedcustomfields.com/resources/local-json/
+ * @link http://www.advancedcustomfields.com/resources/synchronized-json/
+ */
+function acf_json_save_point($path)
+{
+    return get_template_directory() . '/acf-json';
+}
+
+add_filter('acf/settings/save_json', 'acf_json_save_point');
+
+/**
+ * The path where JSON files are loaded when ACF field groups are initialized
+ * @param array of string paths of load point(s)
+ * @return array of string paths of load point(s)
+ * @link http://www.advancedcustomfields.com/resources/local-json/
+ * @link http://www.advancedcustomfields.com/resources/synchronized-json/
+ */
+function acf_json_load_point($paths)
+{
+    return array(get_template_directory() . '/acf-json');
+}
+
+add_filter('acf/settings/load_json', 'acf_json_load_point');

@@ -10,5 +10,6 @@ require get_template_directory() . '/inc/widgets.php';
 require get_template_directory() . '/inc/enqueues.php';
 require get_template_directory() . '/inc/template-tags.php';
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/optimize.php';
 require get_template_directory() . '/inc/acf.php';
 require get_template_directory() . '/inc/cpt.php';
