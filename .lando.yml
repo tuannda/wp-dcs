@@ -1,4 +1,4 @@
-name: wp-dcs
+name: hatinhspa
 recipe: wordpress
 config:
   webroot: .
